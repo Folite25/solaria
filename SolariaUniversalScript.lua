@@ -25,29 +25,16 @@ local Window = Rayfield:CreateWindow({
       Key = {"https://pastebin.com/raw/r3bDM1Wz"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22") 
    }        
 })
-      
-      local MainTab = Window:CreateTab("🏠 Home", nil) -- Title, Image
-      local MainSection = MainTab:CreateSection("Main")
 
-Rayfield:Notify({
-   Title = "Script Executed",
-   Content = "By Solaria Hub",
-   Duration = 5,
-   Image = nil,
-   Actions = { -- Notification Buttons
-      Ignore = {
-         Name = "Okay",
-         Callback = function()
-         print("The user tapped Okay!")
-      end
-   },
-},
-})
+local PlayerTab = Window:CreateTab("Player", 4483362458) -- Title, Image
 
-local Button = MainTab:CreateButton({
-   Name = "Infinite Jump",
-   Callback = function()
-   -- The function that takes place when the button is pressed
+local Slider = Tab:CreateSlider({
+   Name = "WalkSpeed",
+   Range = {10, 100},
+   Increment = 10,
+   Suffix = "Speed",
+   CurrentValue = 10,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
    end,
 })
-
