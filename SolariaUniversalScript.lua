@@ -29,17 +29,60 @@ local Window = Rayfield:CreateWindow({
 local PlayerTab = Window:CreateTab("Player", 4483362458) -- Title, Image
 
 -- Correct usage of PlayerTab instead of Tab
-local WalkSpeedSlider = PlayerTab:CreateSlider({
-   Name = "WalkSpeed",
-   Range = {10, 100},
-   Increment = 10,
-   Suffix = "Speed",
-   CurrentValue = 10,
-   Flag = "Slider1", -- Unique flag for this slider
-   Callback = function(Value)
-      game.Players.LocalPlayer.Character:SetAttribute("SpeedMultiplier", Value)
-   end,    
-})
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+-- Paramètres de hauteur et de vitesse
+local heightMultiplier = 1.5 -- Le multiplicateur de hauteur (1.5 = 150% de la taille d'origine)
+local speedMultiplier = 2 -- Le multiplicateur de vitesse (2 = 200% de la vitesse d'origine)
+
+-- Fonction pour changer la taille du personnage
+local function changeHeight()
+    for _, part in pairs(character:GetChildren()) do
+        if part:IsA("BasePart") then
+            part.Size = part.Size * heightMultiplier
+            part.Position = part.Position + Vector3.new(0, (part.Size.Y / 2) * (heightMultiplier - 1), 0)
+        elseif part:IsA("Accessory") then
+            local handle = part:FindFirstChild("Handle")
+            if handle then
+                handle.Size = handle.Size * heightMultiplier
+            end
+        end
+    end
+    humanoid.HipHeight = humanoid.HipHeight * heightMultiplier
+end
+
+-- Fonction pour changer la vitesse du personnage
+local function changeSpeed()
+    humanoid.WalkSpeed = humanoid.WalkSpeed * speedMultiplier
+end
+
+-- Appliquer les changements
+changeHeight()
+changeSpeed()
+
+-- Optionnel: Réinitialiser la taille et la vitesse après un certain temps
+wait(10) -- Par exemple, après 10 secondes
+
+-- Réinitialiser les paramètres d'origine
+local function resetCharacter()
+    for _, part in pairs(character:GetChildren()) do
+        if part:IsA("BasePart") then
+            part.Size = part.Size / heightMultiplier
+        elseif part:IsA("Accessory") then
+            local handle = part:FindFirstChild("Handle")
+            if handle then
+                handle.Size = handle.Size / heightMultiplier
+            end
+        end
+    end
+    humanoid.HipHeight = humanoid.HipHeight / heightMultiplier
+    humanoid.WalkSpeed = humanoid.WalkSpeed / speedMultiplier
+end
+
+resetCharacter()
+
 
 local DashSpeedSlider = PlayerTab:CreateSlider({
    Name = "Dash Speed",
