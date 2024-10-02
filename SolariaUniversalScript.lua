@@ -29,6 +29,31 @@ local Window = Rayfield:CreateWindow({
 local PlayerTab = Window:CreateTab("Player", 4483362458) -- Title, Image
 
 -- Correct usage of PlayerTab instead of Tab
+
+local DashSpeedSlider = PlayerTab:CreateSlider({
+   Name = "Dash Speed",
+   Range = {10, 100},
+   Increment = 1,
+   Suffix = "Length",
+   CurrentValue = 10,
+   Flag = "Slider2", -- Different flag for this slider
+   Callback = function(Value)
+      game.Players.LocalPlayer.Character:SetAttribute("DashLength", Value)
+   end,
+})
+
+local JumpHeigth = PlayerTab:CreateSlider({
+   Name = "Jump Heigth",
+   Range = {10, 500},
+   Increment = 1,
+   Suffix = "Length",
+   CurrentValue = 10,
+   Flag = "Slider2", -- Different flag for this slider
+   Callback = function(Value)
+      game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+   end,
+})
+
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
@@ -82,28 +107,3 @@ local function resetCharacter()
 end
 
 resetCharacter()
-
-
-local DashSpeedSlider = PlayerTab:CreateSlider({
-   Name = "Dash Speed",
-   Range = {10, 100},
-   Increment = 1,
-   Suffix = "Length",
-   CurrentValue = 10,
-   Flag = "Slider2", -- Different flag for this slider
-   Callback = function(Value)
-      game.Players.LocalPlayer.Character:SetAttribute("DashLength", Value)
-   end,
-})
-
-local DashSpeedSlider = PlayerTab:CreateSlider({
-   Name = "Jump Height",
-   Range = {10, 500},
-   Increment = 1,
-   Suffix = "Length",
-   CurrentValue = 10,
-   Flag = "Slider2", -- Different flag for this slider
-   Callback = function(Value)
-      game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
-   end,
-})
