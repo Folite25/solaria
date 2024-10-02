@@ -24,7 +24,7 @@ local Window = Rayfield:CreateWindow({
       GrabKeyFromSite = true, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
       Key = {"https://pastebin.com/raw/r3bDM1Wz"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22") 
    }        
-]}
+})
       
       local Tab = Window:CreateTab("🏠 Home", nil) -- Title, Image
       local Section = Tab:CreateSection("Main")
