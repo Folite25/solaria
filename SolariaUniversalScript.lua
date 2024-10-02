@@ -28,3 +28,18 @@ local Window = Rayfield:CreateWindow({
       
       local Tab = Window:CreateTab("🏠 Home", nil) -- Title, Image
       local Section = Tab:CreateSection("Main")
+
+Rayfield:Notify({
+   Title = "Script Executed",
+   Content = "By Solaria Hub",
+   Duration = 5,
+   Image = nil,
+   Actions = { -- Notification Buttons
+      Ignore = {
+         Name = "Okay",
+         Callback = function()
+         print("The user tapped Okay!")
+      end
+   },
+},
+})
