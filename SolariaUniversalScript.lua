@@ -36,5 +36,18 @@ local Slider = Tab:CreateSlider({
    CurrentValue = 10,
    Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(Value)
+    game.Players.LocalPlayer.Character:SetAttribute("SpeedMultiplier", value)
+   end,    
+})
+
+local Slider = Tab:CreateSlider({
+   Name = "Dash Speed",
+   Range = {10, 100},
+   Increment = 1,
+   Suffix = "Length",
+   CurrentValue = 10,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+    game.Players.LocalPlayer.Character:SetAttribute("DashLength", value)
    end,
 })
