@@ -28,26 +28,39 @@ local Window = Rayfield:CreateWindow({
 
 local PlayerTab = Window:CreateTab("Player", 4483362458) -- Title, Image
 
-local Slider = Tab:CreateSlider({
+-- Correct usage of PlayerTab instead of Tab
+local WalkSpeedSlider = PlayerTab:CreateSlider({
    Name = "WalkSpeed",
    Range = {10, 100},
    Increment = 10,
    Suffix = "Speed",
    CurrentValue = 10,
-   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Flag = "Slider1", -- Unique flag for this slider
    Callback = function(Value)
-    game.Players.LocalPlayer.Character:SetAttribute("SpeedMultiplier", value)
+      game.Players.LocalPlayer.Character:SetAttribute("SpeedMultiplier", Value)
    end,    
 })
 
-local Slider = Tab:CreateSlider({
+local DashSpeedSlider = PlayerTab:CreateSlider({
    Name = "Dash Speed",
    Range = {10, 100},
    Increment = 1,
    Suffix = "Length",
    CurrentValue = 10,
-   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Flag = "Slider2", -- Different flag for this slider
    Callback = function(Value)
-    game.Players.LocalPlayer.Character:SetAttribute("DashLength", value)
+      game.Players.LocalPlayer.Character:SetAttribute("DashLength", Value)
+   end,
+})
+
+local DashSpeedSlider = PlayerTab:CreateSlider({
+   Name = "Jump Height",
+   Range = {10, 500},
+   Increment = 1,
+   Suffix = "Length",
+   CurrentValue = 10,
+   Flag = "Slider2", -- Different flag for this slider
+   Callback = function(Value)
+      game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
    end,
 })
