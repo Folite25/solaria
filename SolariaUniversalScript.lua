@@ -26,8 +26,8 @@ local Window = Rayfield:CreateWindow({
    }        
 })
       
-      local Tab = Window:CreateTab("🏠 Home", nil) -- Title, Image
-      local Section = Tab:CreateSection("Main")
+      local MainTab = Window:CreateTab("🏠 Home", nil) -- Title, Image
+      local MainSection = MainTab:CreateSection("Main")
 
 Rayfield:Notify({
    Title = "Script Executed",
@@ -42,4 +42,11 @@ Rayfield:Notify({
       end
    },
 },
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Infinite Jump",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+   end,
 })
